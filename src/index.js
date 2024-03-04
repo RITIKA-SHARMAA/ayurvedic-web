@@ -1,13 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import App from './LandingPage/mainPage';
 import reportWebVitals from './reportWebVitals';
+import Header from "./scr1/UI/Header";
+import StickyFooter from "./scr1/UI/Footer";
+import {Stack} from "@mui/material";
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// TODO remove, this demo shouldn't need to reset the theme.
+const defaultTheme = createTheme();
+
 root.render(
   <React.StrictMode>
-    <App />
+      <ThemeProvider theme={defaultTheme}>
+
+          <Stack>
+              <Header/>
+              <App/>
+              <StickyFooter/>
+          </Stack>
+      </ThemeProvider>
   </React.StrictMode>
 );
 
