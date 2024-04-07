@@ -9,7 +9,8 @@ function App() {
         <div>
             <BrowserRouter>
                 <Routes>
-                    < Route index element={<Home/>}/>
+
+                < Route index element={<Home/>}/>
                     <Route path="/Home" element={<Home/>}/>
                     <Route path="/More" element={<More/>}/>
                     <Route path="/About" element={<About/>}/>
