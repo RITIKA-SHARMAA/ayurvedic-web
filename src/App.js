@@ -1,17 +1,7 @@
-import {render, screen} from '@testing-library/react';
-import App from './LandingPage/mainPage';
-//import Slider from "./Components/Slider";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import More from "./pages/More";
 import About from "./pages/About";
 
-
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-    //      <Slider/>
-});
 
 function App1() {
     return (

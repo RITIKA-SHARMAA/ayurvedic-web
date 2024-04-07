@@ -1,14 +1,20 @@
 import * as React from 'react';
-import {alpha, Box, Stack, TextField} from "@mui/material";
-import '../App.css';
-import SwipeableViews from 'react-swipeable-views';
+import {Box, Stack, TextField} from "@mui/material";
+
+/*import SwipeableViews from 'react-swipeable-views';
 import {autoPlay} from 'react-swipeable-views-utils';
+
+
+dependencies to add >> //"react-swipeable-views": "^0.14.0",
+"react-swipeable-views-utils": "^0.14.0",
+*/
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-import Button from "@mui/material/Button";
+import Autocomplete from "@mui/material/Autocomplete";
+import axios from "axios";
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+
+//const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
     {
@@ -29,7 +35,6 @@ const images = [
     },
 ];
 
-
 function Main() {
     const [activeStep, setActiveStep] = React.useState(0);
     const handleStepChange = (step) => {
@@ -39,10 +44,25 @@ function Main() {
 
     };
 
+    const [response, setResponse] = React.useState([])
+
+
+    React.useEffect(() => {
+        axios.get("http://localhost:3003/users/diseases")
+            .then(res => {
+                console.log(res.data.diseases)
+                setResponse(res.data.diseases)
+            })
+    }, [])
+
+
+
+
     return (
 
         <Box>
             {/* Slider */}
+            {/*
             <AutoPlaySwipeableViews
                 index={activeStep}
                 onChangeIndex={handleStepChange}
@@ -69,6 +89,7 @@ function Main() {
                     </div>
                 ))}
             </AutoPlaySwipeableViews>
+            */}
 
             <Container
                 sx={{
@@ -79,7 +100,8 @@ function Main() {
                     pb: {xs: 8, sm: 12},
                 }}
             >
-                <Stack spacing={2} useFlexGap sx={{width: {xs: '100%', sm: '70%'}}}>
+                <Stack spacing={4} useFlexGap sx={{width: {xs: '100%', sm: '70%'}}}>
+
                     <Typography
                         component="h1"
                         variant="h1"
@@ -89,8 +111,8 @@ function Main() {
                             alignSelf: 'center',
                             textAlign: 'center',
                         }}
-                    >
-                        Our latest&nbsp;
+                    >Holistic&nbsp;
+
                         <Typography
                             component="span"
                             variant="h1"
@@ -98,15 +120,37 @@ function Main() {
                                 color: (theme) =>
                                     theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
                             }}
-                        >
-                            products
+                        >Heal
                         </Typography>
                     </Typography>
+
                     <Typography variant="body1" textAlign="center" color="text.secondary">
-                        Explore our cutting-edge dashboard, delivering high-quality solutions
-                        tailored to your needs. <br/>
-                        Elevate your experience with top-tier features and services.
+                        Life or Existence is not a rigid compartment but a harmonious flow<br/>
+                        Find the right path to live a healthy life
+
                     </Typography>
+
+
+                    <Autocomplete
+                        getOptionLabel={(option) => option.diseases}
+                        options={response}
+                        onChange={(e, value, reason) => {
+                            //setSelectedShopType(value)
+                            console.log(value)
+                        }}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Search..."
+                                InputProps={{
+                                    ...params.InputProps,
+                                }}
+                            />
+                        )}
+                    />
+
+
+                    {/*
                     <Stack
                         direction={{xs: 'column', sm: 'row'}}
                         alignSelf="center"
@@ -137,8 +181,9 @@ function Main() {
                         </Link>
                         .
                     </Typography>
+                    */}
                 </Stack>
-                <Box
+                {/* <Box
                     id="image"
                     sx={(theme) => ({
                         mt: {xs: 8, sm: 10},
@@ -161,8 +206,9 @@ function Main() {
                                 ? `0 0 12px 8px ${alpha('#9CCCFC', 0.2)}`
                                 : `0 0 24px 12px ${alpha('#033363', 0.2)}`,
                     })}
-                />
+                />*/}
             </Container>
+
 
         </Box>
 

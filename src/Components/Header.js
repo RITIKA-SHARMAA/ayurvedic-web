@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
+import Link from "@mui/material/Link";
+
 
 const logoStyle = {
     width: '140px',
@@ -102,14 +104,26 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 </Typography>
                             </MenuItem>
 
-                            <MenuItem
-                                onClick={() => scrollToSection('testimonials')}
-                                sx={{py: '6px', px: '12px'}}
+
+                            <Link
+                                color="inherit"
+                                href="/Response"
+                                sx={{display: "block"}}
                             >
-                                <Typography variant="body2" color="text.primary">
-                                    Testimonials
-                                </Typography>
-                            </MenuItem>
+                                <MenuItem
+                                    onClick={() => scrollToSection('testimonials')}
+                                    sx={{py: '6px', px: '12px'}}
+                                >
+                                    <Typography variant="body2" color="text.primary">
+                                        Response
+                                    </Typography>
+                                </MenuItem>
+                            </Link>
+
+
+
+
+
 
                             <MenuItem
                                 onClick={() => scrollToSection('highlights')}
@@ -117,15 +131,6 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                             >
                                 <Typography variant="body2" color="text.primary">
                                     Highlights
-                                </Typography>
-                            </MenuItem>
-
-                            <MenuItem
-                                onClick={() => scrollToSection('pricing')}
-                                sx={{py: '6px', px: '12px'}}
-                            >
-                                <Typography variant="body2" color="text.primary">
-                                    Pricing
                                 </Typography>
                             </MenuItem>
 
@@ -139,7 +144,6 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                             </MenuItem>
                         </Box>
                     </Box>
-
 
                     <Box sx={{display: {sm: '', md: 'none'}}}>
                         <Button
