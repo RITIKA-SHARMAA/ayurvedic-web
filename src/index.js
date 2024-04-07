@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './LandingPage/mainPage';
-import App1 from './App';
 import reportWebVitals from './reportWebVitals';
 import Header from "./Components/Header";
 import StickyFooter from "./Components/Footer";
@@ -20,7 +19,6 @@ root.render(
           <Stack>
               <Header/>
               <App/>
-              <App1/>
               <StickyFooter/>
           </Stack>
       </ThemeProvider>

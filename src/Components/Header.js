@@ -93,21 +93,9 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                             alt="logo of sitemark"
                         />
                         <Box sx={{display: {xs: 'none', md: 'flex'}}}>
-                            <MenuItem
-                                onClick={() => scrollToSection('features')}
-                                sx={{py: '6px', px: '12px'}}
-
-                                // TODO change with the other pages
-                            >
-                                <Typography variant="body2" color="text.primary">
-                                    Features
-                                </Typography>
-                            </MenuItem>
-
-
                             <Link
                                 color="inherit"
-                                href="/Response"
+                                href="/Home"
                                 sx={{display: "block"}}
                             >
                                 <MenuItem
@@ -115,33 +103,59 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                     sx={{py: '6px', px: '12px'}}
                                 >
                                     <Typography variant="body2" color="text.primary">
-                                        Response
+                                        Home
                                     </Typography>
                                 </MenuItem>
                             </Link>
 
 
-
-
-
-
-                            <MenuItem
-                                onClick={() => scrollToSection('highlights')}
-                                sx={{py: '6px', px: '12px'}}
+                            <Link
+                                color="inherit"
+                                href="/About"
+                                sx={{display: "block"}}
                             >
-                                <Typography variant="body2" color="text.primary">
-                                    Highlights
-                                </Typography>
-                            </MenuItem>
+                                <MenuItem
+                                    onClick={() => scrollToSection('testimonials')}
+                                    sx={{py: '6px', px: '12px'}}
+                                >
+                                    <Typography variant="body2" color="text.primary">
+                                        About
+                                    </Typography>
+                                </MenuItem>
+                            </Link>
 
-                            <MenuItem
-                                onClick={() => scrollToSection('faq')}
-                                sx={{py: '6px', px: '12px'}}
+
+                            <Link
+                                color="inherit"
+                                href="/More"
+                                sx={{display: "block"}}
                             >
-                                <Typography variant="body2" color="text.primary">
-                                    FAQ
-                                </Typography>
-                            </MenuItem>
+                                <MenuItem
+                                    onClick={() => scrollToSection('testimonials')}
+                                    sx={{py: '6px', px: '12px'}}
+                                >
+                                    <Typography variant="body2" color="text.primary">
+                                        More
+                                    </Typography>
+                                </MenuItem>
+                            </Link>
+
+                            <Link
+                                color="inherit"
+                                href="/ChatBot"
+                                sx={{display: "block"}}
+                            >
+                                <MenuItem
+                                    onClick={() => scrollToSection('testimonials')}
+                                    sx={{py: '6px', px: '12px'}}
+                                >
+                                    <Typography variant="body2" color="text.primary">
+                                        ChatBot
+                                    </Typography>
+                                </MenuItem>
+                            </Link>
+
+
                         </Box>
                     </Box>
 
