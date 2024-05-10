@@ -3,6 +3,8 @@ import More from "../pages/More";
 import About from "../pages/About";
 import Home from "../pages/Home";
 import ChatBot from "../pages/ChatBot";
+import Start from "../pages/Start";
+import Result from "../pages/Result";
 
 function App() {
     return (
@@ -15,6 +17,8 @@ function App() {
                     <Route path="/More" element={<More/>}/>
                     <Route path="/About" element={<About/>}/>
                     <Route path="/ChatBot" element={<ChatBot/>}/>
+                    <Route path="/Start" element={<Start/>}/>
+                    <Route path="/Result/:diseasesName/" element={<Result/>}/>
 
                 </Routes>
             </BrowserRouter>

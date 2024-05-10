@@ -93,6 +93,8 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                             alt="logo of sitemark"
                         />
                         <Box sx={{display: {xs: 'none', md: 'flex'}}}>
+
+
                             <Link
                                 color="inherit"
                                 href="/Home"
@@ -108,6 +110,20 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 </MenuItem>
                             </Link>
 
+                            <Link
+                                color="inherit"
+                                href="/Start"
+                                sx={{display: "block"}}
+                            >
+                                <MenuItem
+                                    onClick={() => scrollToSection('testimonials')}
+                                    sx={{py: '6px', px: '12px'}}
+                                >
+                                    <Typography variant="body2" color="text.primary">
+                                        Start
+                                    </Typography>
+                                </MenuItem>
+                            </Link>
 
                             <Link
                                 color="inherit"

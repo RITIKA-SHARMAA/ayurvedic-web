@@ -3,8 +3,6 @@ import {Box, Stack, TextField} from "@mui/material";
 
 /*import SwipeableViews from 'react-swipeable-views';
 import {autoPlay} from 'react-swipeable-views-utils';
-
-
 dependencies to add >> //"react-swipeable-views": "^0.14.0",
 "react-swipeable-views-utils": "^0.14.0",
 */
