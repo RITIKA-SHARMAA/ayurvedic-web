@@ -5,7 +5,8 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import {Divider, Stack} from "@mui/material";
+import {Stack} from "@mui/material";
+import homeBanner from "../images/S4.png";
 
 
 function Start() {
@@ -16,7 +17,7 @@ function Start() {
     // State to hold selected ingredient
 
     React.useEffect(() => {
-        axios.get("http://localhost:3003/users/diseases")
+        axios.get(process.env.REACT_APP_BASE_URL + "users/diseases")
             .then(res => {
                 console.log(res.data.diseases)
                 setDiseases(res.data.diseases)
@@ -26,7 +27,7 @@ function Start() {
     const [ingredient, setIngredient] = React.useState([])
 
     React.useEffect(() => {
-        axios.get("http://localhost:3003/users/ingredient")
+        axios.get(process.env.REACT_APP_BASE_URL + "users/ingredient")
             .then(res => {
                 console.log(res.data.ingredient)
                 setIngredient(res.data.ingredient)
@@ -35,42 +36,99 @@ function Start() {
 
 
     return (
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            pt: {xs: 0, sm: 0},
+            pb: {xs: 0, sm: 21},
 
-        <Container>
+        }}>
+            <div
+                style={{
+                    backgroundImage: `url(${homeBanner})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    minHeight: '50vh', // Adjust as needed
+                }}
+            >
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        pt: {xs: 14, sm: 16},
+                        pb: {xs: 0, sm: 0},
 
-            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh'}}>
-                <Stack direction={"column"} spacing={3}>
-                    <Typography variant="h3" component="div">
-                        Welcome to the Disease Prediction System
-                    </Typography>
+                    }}
+                >
+                    <Stack direction=" row " spacing={{xs: 5, sm: 2}}>
+                        <Typography>
+                            .............................................
+                        </Typography>
+                        <Typography component="h1"
+                                    variant="h1"
+                                    style={{
+                                        color: '#EEFFFF',
+                                        fontFamily: 'Poppins',
+                                        fontSize: '5.0rem',
+                                        textAlign: 'left'
+                                    }}>
+                            Welcome to the
+                        </Typography>
+                    </Stack>
+
+                    <Stack direction=" row " spacing={{xs: 5, sm: 2}}>
+                        <Typography>
+                            .......
+                        </Typography>
+                        <Typography component="h1"
+                                    variant="h1"
+                                    style={{
+                                        color: '#EEFFFF',
+                                        fontFamily: 'Poppins',
+                                        fontSize: '5.4rem',
+                                        textAlign: 'left'
+                                    }}>
+                            Disease Prediction System
+                        </Typography>
+                    </Stack>
 
 
-                    <Divider/>
-
-                    <Autocomplete
-                        getOptionLabel={(option) => option.diseases}
-                        options={diseases}
-                        onChange={(e, value, reason) => {
-                            //setSelectedShopType(value)
+                </Box>
+            </div>
 
 
-                            console.log(value)
-                            window.open("http://localhost:3000/Result?diseases=" + value.diseases)
-
-                        }}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                label="Search your diseases..."
-                                InputProps={{
-                                    ...params.InputProps,
-                                }}
-                            />
-                        )}
-                    />
+            <Container>
+                <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '30vh'}}>
 
 
-                    <Autocomplete
+                    <Stack direction={"column"} spacing={1}>
+
+                        <Typography align={"center"}>
+                            Search your diseases
+                        </Typography>
+
+                        <Autocomplete
+                            getOptionLabel={(option) => option.diseases}
+                            options={diseases}
+                            onChange={(e, value, reason) => {
+                                //setSelectedShopType(value)
+                                console.log(value)
+                                window.open("http://localhost:3000/Result?diseases=" + value.diseases + "&id=" + value.id)
+
+                            }}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    label="Search..."
+                                    InputProps={{
+                                        ...params.InputProps,
+                                    }}
+                                />
+                            )}
+                        />
+
+
+                        {/*<Autocomplete
                         getOptionLabel={(option) => option.ingredient}
                         options={ingredient}
                         onChange={(e, value, reason) => {
@@ -88,16 +146,28 @@ function Start() {
                             />
                         )}
                     />
+*/}
 
-
-                </Stack>
+                    </Stack>
             </Box>
         </Container>
+        </Box>
 
 
     )
 }
 
+{/*<Stack direction =" row " spacing={{ xs: 5, sm: 2 }}>
+                    <Typography >
+                        ..............................................................
+                    </Typography>
+                    <Typography component="h1"
+                                variant="h1"
+                                style={{ color: '#EEFFFF', fontFamily: 'Poppins' ,  fontSize: '5.0rem', textAlign: 'left'}} >
+                       System
+                    </Typography>
+                    </Stack>*/
+}
 
 export default Start;
 

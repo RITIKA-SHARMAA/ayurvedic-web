@@ -1,4 +1,3 @@
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -6,7 +5,7 @@ import Link from '@mui/material/Link';
 
 function Copyright() {
     return (
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color='#F9F5D3'>
             {'Copyright © '}
             <Link color="inherit" href="https://mui.com/">
                 Your Website
@@ -22,28 +21,18 @@ export default function StickyFooter() {
     return (
         <Box
             sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: '100vh',
+                display: 'block',
             }}
         >
-            <CssBaseline/>
-
 
             <Box
                 component="footer"
                 sx={{
-                    py: 1,
-                    px: 2,
-                    mt: 'auto',
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === 'light'
-                            ? theme.palette.grey[200]
-                            : theme.palette.grey[800],
+                    backgroundColor: '#4D5D43'
                 }}
             >
-                <Container maxWidth="sm">
-                    <Typography variant="body1">
+                <Container>
+                    <Typography color='#F9F5D3'>
                         My sticky footer can be found here.
                     </Typography>
                     <Copyright/>

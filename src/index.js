@@ -6,16 +6,27 @@ import Header from "./Components/Header";
 import StickyFooter from "./Components/Footer";
 import {Stack} from "@mui/material";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import CssBaseline from "@mui/material/CssBaseline";
 //import App1 from './App.test';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+    palette: {
+        background: {
+            default: '#fff3e0',   //'#F9F5D3',
+        },
+        secondary: {
+            main: '#4D5D43',
+        },
+    },
 
+});
 root.render(
   <React.StrictMode>
       <ThemeProvider theme={defaultTheme}>
+          <CssBaseline/>
           <Stack>
               <Header/>
               <App/>

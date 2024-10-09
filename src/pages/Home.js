@@ -1,39 +1,22 @@
 import * as React from 'react';
-import {Box, Stack, TextField} from "@mui/material";
+import {Box, Stack} from "@mui/material";
 
 /*import SwipeableViews from 'react-swipeable-views';
 import {autoPlay} from 'react-swipeable-views-utils';
 dependencies to add >> //"react-swipeable-views": "^0.14.0",
 "react-swipeable-views-utils": "^0.14.0",
 */
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Autocomplete from "@mui/material/Autocomplete";
 import axios from "axios";
+import Button from "@mui/material/Button";
+import homeBanner from '../images/S3.png';
 
 
 //const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const images = [
-    {
-        label: 'San Francisco – Oakland Bay Bridge, United States',
-        imgPath: './Images/A1.png'
-    },
-    {
-        label: 'Bird',
-        imgPath: 'https://img.freepik.com/free-vector/watercolor-nature-background-with-leaves_52683-59449.jpg?size=626&ext=jpg&ga=GA1.1.1395880969.1709510400&semt=ais',
-    },
-    {
-        label: 'Bali, Indonesia',
-        imgPath: 'https://static.vecteezy.com/system/resources/thumbnails/022/399/950/original/green-watercolor-background-with-leaves-animation-for-wedding-invitation-free-video.jpg',
-    },
-    {
-        label: 'Goč, Serbia',
-        imgPath: 'https://daadiplanet.in/wp-content/uploads/2024/02/2996978.jpg'
-    },
-];
 
 function Main() {
+
     const [activeStep, setActiveStep] = React.useState(0);
     const handleStepChange = (step) => {
         new Promise(r => setTimeout(r, 100)).then(r => {
@@ -46,7 +29,7 @@ function Main() {
 
 
     React.useEffect(() => {
-        axios.get("http://localhost:3003/users/diseases")
+        axios.get(process.env.REACT_APP_BASE_URL + "users/diseases")
             .then(res => {
                 console.log(res.data.diseases)
                 setResponse(res.data.diseases)
@@ -55,79 +38,123 @@ function Main() {
 
 
     return (
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            pt: {xs: 0, sm: 0},
+            pb: {xs: 0, sm: 15},
 
-        <Box>
-            {/* Slider */}
-            {/*
-            <AutoPlaySwipeableViews
-                index={activeStep}
-                onChangeIndex={handleStepChange}
-                enableMouseEvents
-            >
-                {images.map((step, index) => (
-                    <div key={step.label}>
-                        {Math.abs(activeStep - index) <= 2 ? (
-                            <Box>
-                                <Box
-                                    component="img"
-                                    sx={{
-                                        height: '100%',
-                                        display: 'block',
-                                        overflow: 'hidden',
-                                        width: '100%',
-                                    }}
-                                    src={step.imgPath}
-                                    alt={step.label}
-                                />
-                            </Box>
-
-                        ) : null}
-                    </div>
-                ))}
-            </AutoPlaySwipeableViews>
-            */}
-
-            <Container
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    pt: {xs: 14, sm: 20},
-                    pb: {xs: 8, sm: 12},
+        }}>
+            <div
+                style={{
+                    backgroundImage: `url(${homeBanner})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    minHeight: '55vh', // Adjust as needed
+                    textAlign: 'left'
                 }}
             >
-                <Stack spacing={4} useFlexGap sx={{width: {xs: '100%', sm: '70%'}}}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        pt: {xs: 14, sm: 14},
+                        pb: {xs: 8, sm: 10},
 
+                    }}
+                >
+                    <Stack direction=" row " spacing={{xs: 5, sm: 2}}>
+                        <Typography>
+                            ......................
+                        </Typography>
+                        <Typography
+                            component="h1"
+                            variant="h1"
+                            style={{color: '#fff3e0', fontFamily: 'Poppins', fontSize: '10.0rem', textAlign: 'left'}}>
+                            Holistic Heal
+                        </Typography>
+
+                    </Stack>
+                </Box>
+
+                <Box>
+
+                    <Typography variant="body1" textAlign="center" color="#fff3e0" fontFamily='Poppins'
+                                fontSize='1.5rem'>
+                        Discover a holistic path to wellness with our personalized Ayurvedic remedy suggestions <br/>
+                        tailored to your unique needs.
+                    </Typography>
+
+                </Box>
+            </div>
+
+            {/*<div
+            style={{
+                backgroundImage: `url(${homeBanner})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                minHeight: '40vh', // Adjust as needed
+            }}
+        >
+            <Box>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                        pt: {xs: 14, sm: 20},
+                        pb: {xs: 8, sm: 15},
+                    }}
+                >
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        pt: {xs: 4, sm: 6},
+                        pb: {xs: 2, sm: 2},
+                    }}>
                     <Typography
                         component="h1"
                         variant="h1"
+                        style={{ color: '#fff3e0', fontFamily: 'Poppins' ,  fontSize: '9.0rem'}}
                         sx={{
                             display: 'flex',
                             flexDirection: {xs: 'column', md: 'row'},
-                            alignSelf: 'center',
-                            textAlign: 'center',
+                           // alignSelf: 'left',
+                            // textAlign: 'left',
                         }}
-                    >Holistic&nbsp;
+                    >Holistic Heal
 
-                        <Typography
-                            component="span"
-                            variant="h1"
-                            sx={{
-                                color: (theme) =>
-                                    theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
-                            }}
-                        >Heal
+                    </Typography>
+                    </Box>
+                        <Typography variant="body1" textAlign="center" color="#fff3e0"  fontFamily='Poppins' fontSize= '1.5rem'>
+                            Discover a holistic path to wellness with our personalized Ayurvedic remedy suggestions
+                            tailored to your unique needs.
                         </Typography>
-                    </Typography>
-
-                    <Typography variant="body1" textAlign="center" color="text.secondary">
-                        Life or Existence is not a rigid compartment but a harmonious flow<br/>
-                        Find the right path to live a healthy life
-
-                    </Typography>
+                </Box>
+            </Box>
+        </div>*/}
 
 
-                    <Autocomplete
+            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '30vh'}}>
+                <Button variant="outlined" href="/Start" align={"center"}>
+                    Get Started!
+                </Button>
+            </Box>
+
+        </Box>
+
+    );
+}
+
+export default Main;
+
+
+{/*
+
+
+
+                     <Autocomplete
                         getOptionLabel={(option) => option.diseases}
                         options={response}
                         onChange={(e, value, reason) => {
@@ -146,7 +173,6 @@ function Main() {
                     />
 
 
-                    {/*
                     <Stack
                         direction={{xs: 'column', sm: 'row'}}
                         alignSelf="center"
@@ -178,8 +204,8 @@ function Main() {
                         .
                     </Typography>
                     */}
-                </Stack>
-                {/* <Box
+
+{/* <Box
                     id="image"
                     sx={(theme) => ({
                         mt: {xs: 8, sm: 10},
@@ -203,13 +229,3 @@ function Main() {
                                 : `0 0 24px 12px ${alpha('#033363', 0.2)}`,
                     })}
                 />*/}
-            </Container>
-
-
-        </Box>
-
-
-    );
-}
-
-export default Main;

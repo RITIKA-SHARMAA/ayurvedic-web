@@ -7,6 +7,8 @@ import Start from "../pages/Start";
 import Result from "../pages/Result";
 
 function App() {
+
+
     return (
         <div>
             <BrowserRouter>
@@ -18,7 +20,7 @@ function App() {
                     <Route path="/About" element={<About/>}/>
                     <Route path="/ChatBot" element={<ChatBot/>}/>
                     <Route path="/Start" element={<Start/>}/>
-                    <Route path="/Result/:diseasesName/" element={<Result/>}/>
+                    <Route path="/Result" element={<Result/>}/>
 
                 </Routes>
             </BrowserRouter>

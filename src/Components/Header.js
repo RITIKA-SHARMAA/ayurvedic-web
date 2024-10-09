@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Avatar, PaletteMode, SvgIcon} from '@mui/material';
+import {Avatar, PaletteMode, Stack} from '@mui/material';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,13 +10,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from "@mui/material/Link";
+import {ReactComponent as YourSvg} from '../images/logo.svg';
+import {createTheme, ThemeProvider} from "@mui/material/styles";
 
-
-const logoStyle = {
-    width: '140px',
-    height: 'auto',
-    cursor: 'pointer',
-};
+// import App.theme from '../LandingPage/mainPage';
 
 interface AppAppBarProps {
     mode: PaletteMode;
@@ -24,12 +21,22 @@ interface AppAppBarProps {
 }
 
 function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
+
+    const defaultTheme = createTheme({
+        typography: {
+            fontFamily: 'Josefin Sans', color: '#fff3e0',
+            allVariants: {
+                color: '#4D5D43',
+            }
+        }
+    });
+
+
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
     };
-
     const scrollToSection = (sectionId: string) => {
         const sectionElement = document.getElementById(sectionId);
         const offset = 128;
@@ -62,7 +69,8 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                         justifyContent: 'space-between',
                         flexShrink: 0,
                         borderRadius: '999px',
-                        backdropFilter: 'blur(24px)',
+                        //backdropFilter: 'blur(10px)',
+
                         maxHeight: 400,
                         borderColor: 'divider'
                     })}
@@ -72,26 +80,23 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                             flexGrow: 1,
                             display: 'flex',
                             alignItems: 'center',
-                            ml: '-18px',
+                            ml: '-200px',
                             px: 0,
                         }}
                     >
-                        <Avatar>
-                            <SvgIcon>
-                                <svg width="37" height="37" viewBox="0 0 37 37" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M33 14.0793H28.37L34.76 7.68927C35.6047 6.84455 36.0793 5.69888 36.0793 4.50427C36.0793 3.30966 35.6047 2.16398 34.76 1.31927C33.9153 0.474556 32.7696 1.54161e-08 31.575 0C30.3804 -1.54161e-08 29.2347 0.474555 28.39 1.31927L19.78 9.92927C19.9251 9.32328 19.999 8.7024 20 8.07927C20 7.81405 19.8947 7.5597 19.7071 7.37216C19.5196 7.18463 19.2652 7.07927 19 7.07927H15C13.8412 7.08021 12.6965 7.33288 11.645 7.81978C10.5935 8.30669 9.66031 9.01621 8.91001 9.89927C8.62728 8.0034 7.67322 6.27207 6.22148 5.02038C4.76975 3.76869 2.91684 3.07987 1.00001 3.07927C0.734793 3.07927 0.480439 3.18463 0.292903 3.37216C0.105366 3.5597 9.15307e-06 3.81405 9.15307e-06 4.07927V8.07927C0.00269659 9.21591 0.247565 10.3389 0.718302 11.3735C1.18904 12.4081 1.87484 13.3305 2.73001 14.0793C2.03329 14.1356 1.38015 14.4409 0.890009 14.9393C0.607155 15.2191 0.382799 15.5525 0.230004 15.9199C0.0772085 16.2872 -0.000973711 16.6814 9.15307e-06 17.0793C0.0143195 20.1787 0.981463 23.1988 2.7703 25.73C4.55914 28.2612 7.08312 30.1811 10 31.2293V35.0793C10 35.3445 10.1054 35.5988 10.2929 35.7864C10.4804 35.9739 10.7348 36.0793 11 36.0793H25C25.2652 36.0793 25.5196 35.9739 25.7071 35.7864C25.8947 35.5988 26 35.3445 26 35.0793V31.2293C28.1054 30.4717 30.02 29.2635 31.61 27.6893C33.0027 26.2957 34.1072 24.6414 34.8604 22.821C35.6137 21.0005 36.0009 19.0494 36 17.0793C36 16.2836 35.6839 15.5206 35.1213 14.9579C34.5587 14.3953 33.7957 14.0793 33 14.0793ZM21 24.0793C21.2652 24.0793 21.5196 24.1846 21.7071 24.3722C21.8947 24.5597 22 24.8141 22 25.0793C22 25.3445 21.8947 25.5988 21.7071 25.7864C21.5196 25.9739 21.2652 26.0793 21 26.0793H19V28.0793C19 28.3445 18.8947 28.5988 18.7071 28.7864C18.5196 28.9739 18.2652 29.0793 18 29.0793C17.7348 29.0793 17.4804 28.9739 17.2929 28.7864C17.1054 28.5988 17 28.3445 17 28.0793V26.0793H15C14.7348 26.0793 14.4804 25.9739 14.2929 25.7864C14.1054 25.5988 14 25.3445 14 25.0793C14 24.8141 14.1054 24.5597 14.2929 24.3722C14.4804 24.1846 14.7348 24.0793 15 24.0793H17V22.0793C17 21.8141 17.1054 21.5597 17.2929 21.3722C17.4804 21.1846 17.7348 21.0793 18 21.0793C18.2652 21.0793 18.5196 21.1846 18.7071 21.3722C18.8947 21.5597 19 21.8141 19 22.0793V24.0793H21ZM15 9.07927H17.92C17.6836 10.478 16.9592 11.7478 15.8754 12.6631C14.7916 13.5785 13.4186 14.0802 12 14.0793H9.08001C9.31644 12.6805 10.0408 11.4108 11.1246 10.4954C12.2084 9.58008 13.5814 9.07834 15 9.07927ZM2.00001 8.07927V5.15927C3.39876 5.3957 4.6685 6.12009 5.58385 7.20386C6.4992 8.28763 7.00094 9.66067 7.00001 11.0793V13.9993C5.60125 13.7628 4.33151 13.0384 3.41617 11.9547C2.50082 10.8709 1.99908 9.49787 2.00001 8.07927Z"
-                                        fill="#4D5D43"/>
-                                </svg>
+                        <Stack direction="row" spacing={6}>
 
-                            </SvgIcon>
+                            <Avatar alt="Logo"
+                                    sx={{width: 50, height: 50, bgcolor: '#fff3e0'}}>
+                                <YourSvg/>
                         </Avatar>
 
-                        <Box sx={{display: {xs: 'none', md: 'flex'}}}>
 
+                            <Box sx={{display: {xs: 'none', md: 'flex'}}}>
 
+                                <Stack direction="row" spacing={6}>
                             <Link
+                                style={{textDecoration: 'none'}}
                                 color="inherit"
                                 href="/Home"
                                 sx={{display: "block"}}
@@ -100,13 +105,19 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                     onClick={() => scrollToSection('testimonials')}
                                     sx={{py: '6px', px: '12px'}}
                                 >
-                                    <Typography variant="body2" color="text.primary">
+                                    <Typography variant="body2" style={{
+                                        fontFamily: 'Josefin Sans',
+                                        fontWeight: 'bold',
+                                        fontSize: '1.7rem'
+                                    }}>
                                         Home
                                     </Typography>
+
                                 </MenuItem>
                             </Link>
 
                             <Link
+                                style={{textDecoration: 'none'}}
                                 color="inherit"
                                 href="/Start"
                                 sx={{display: "block"}}
@@ -115,13 +126,26 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                     onClick={() => scrollToSection('testimonials')}
                                     sx={{py: '6px', px: '12px'}}
                                 >
-                                    <Typography variant="body2" color="text.primary">
+                                    <Typography variant="body2" style={{
+                                        fontFamily: 'Josefin Sans',
+                                        fontWeight: 'bold',
+                                        fontSize: '1.7rem'
+                                    }}>
                                         Start
                                     </Typography>
+
                                 </MenuItem>
                             </Link>
 
-                            <Link
+                                    <ThemeProvider theme={window.location.pathname === "/Result" ? defaultTheme : ''}>
+                                        <ThemeProvider
+                                            theme={window.location.pathname === "/About" ? defaultTheme : ''}>
+                                            <ThemeProvider
+                                                theme={window.location.pathname === "/ChatBot" ? defaultTheme : ''}>
+
+
+                                                <Link
+                                                    style={{textDecoration: 'none'}}
                                 color="inherit"
                                 href="/About"
                                 sx={{display: "block"}}
@@ -130,14 +154,20 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                     onClick={() => scrollToSection('testimonials')}
                                     sx={{py: '6px', px: '12px'}}
                                 >
-                                    <Typography variant="body2" color="text.primary">
+                                    <Typography variant="body2" style={{
+                                        fontFamily: 'Josefin Sans',
+                                        fontWeight: 'bold',
+                                        fontSize: '1.7rem'
+                                    }}>
                                         About
                                     </Typography>
+
                                 </MenuItem>
                             </Link>
 
 
                             <Link
+                                style={{textDecoration: 'none'}}
                                 color="inherit"
                                 href="/More"
                                 sx={{display: "block"}}
@@ -146,13 +176,19 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                     onClick={() => scrollToSection('testimonials')}
                                     sx={{py: '6px', px: '12px'}}
                                 >
-                                    <Typography variant="body2" color="text.primary">
+                                    <Typography variant="body2" style={{
+                                        fontFamily: 'Josefin Sans',
+                                        fontWeight: 'bold',
+                                        fontSize: '1.7rem'
+                                    }}>
                                         More
                                     </Typography>
+
                                 </MenuItem>
                             </Link>
 
                             <Link
+                                style={{textDecoration: 'none'}}
                                 color="inherit"
                                 href="/ChatBot"
                                 sx={{display: "block"}}
@@ -161,14 +197,24 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                     onClick={() => scrollToSection('testimonials')}
                                     sx={{py: '6px', px: '12px'}}
                                 >
-                                    <Typography variant="body2" color="text.primary">
-                                        ChatBot
+                                    <Typography variant="body2" style={{
+                                        fontFamily: 'Josefin Sans',
+                                        fontWeight: 'bold',
+                                        fontSize: '1.7rem'
+                                    }}>
+                                        Chatbot
                                     </Typography>
+
                                 </MenuItem>
                             </Link>
+                                            </ThemeProvider>
+                                        </ThemeProvider>
+                                    </ThemeProvider>
 
-
+                                </Stack>
                         </Box>
+                        </Stack>
+
                     </Box>
 
                     <Box sx={{display: {sm: '', md: 'none'}}}>

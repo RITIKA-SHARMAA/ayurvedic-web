@@ -3,53 +3,75 @@ import Container from "@mui/material/Container";
 import {Stack} from "@mui/material";
 import Box from "@mui/material/Box";
 import * as React from "react";
+import {useEffect} from "react";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import {useParams} from "react-router-dom";
+import {useLocation} from "react-router-dom";
+import homeBanner from "../images/S5.png";
 
 function Result() {
     console.log('Result component rendering'); // Check if component is rendering
 
+    const [diseasesName, setDiseasesName] = React.useState(null);
 //remove this for project to work properly also Result routes
-    const params = useParams();
-    console.log("use params hook", params)
-    const diseasesName = params.diseasesName;
-    console.log('diseases:', diseasesName);
-
-
-    const [ingredient, setIngredient] = React.useState([])
+    const search = useLocation().search;
+    const diseas = new URLSearchParams(search).get("diseases");
+    const diseasId = new URLSearchParams(search).get("id");
+    const [responseData, setResponseData] = React.useState([])
     const [selectedIngredient, setSelectedIngredient] = React.useState(null); // State to hold selected ingredient
 
-    React.useEffect(() => {
-        axios.get("http://localhost:3003/users/ingredient")
+    useEffect(() => {
+        setDiseasesName(diseas)
+        axios.get(process.env.REACT_APP_BASE_URL + "users/getIngredientAndTreatmentOfDiseasesId?id=" + diseasId)
             .then(res => {
-                console.log(res.data.ingredient)
-                setIngredient(res.data.ingredient)
+                console.log(res.data)
+                setResponseData(res.data.responseData)
 
             })
-    }, [])
+
+    }, [diseas, diseasId])
+
+
+
 
 
     return (
-        <Container>
-            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh'}}>
-                <Stack>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            pt: {xs: 0, sm: 0},
+            pb: {xs: 0, sm: 0},
+
+        }}>
+
+            <div style={{display: 'flex', flexDirection: 'row'}}>
+                <div style={{
+                    flex: '1', // Take up remaining space
+                    display: 'flex',
+                    backgroundImage: `url(${homeBanner})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    minHeight: 880, // Adjust as needed
+                    maxWidth: 450,
+                }}>
+                </div>
 
 
-                    <Typography> {diseasesName} </Typography>
+                <div style={{flex: '1', display: 'flex', flexDirection: 'column'}}>
+                    <Container>
+                        <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh'}}>
+                            <Stack>
+
+                                <Typography> {diseasesName} </Typography>
 
 
-                    <Typography> {selectedIngredient ? selectedIngredient.ingredient : 'Select an ingredient'} </Typography>
-                    <Autocomplete
+                                <Typography> {'Select an ingredient'} </Typography>
+                                <Autocomplete
                         getOptionLabel={(option) => option.ingredient}
-                        options={ingredient}
+                        options={responseData}
                         onChange={(e, value, reason) => {
-                            //setSelectedShopType(value)
                             setSelectedIngredient(value); // Update selected ingredient
-
-                            console.log(value)
-                            // window.open("http://localhost:3000/More?ingredient=" + value.ingredient)
                         }}
                         renderInput={(params) => (
                             <TextField
@@ -61,10 +83,15 @@ function Result() {
                             />
                         )}
                     />
-
+                                <Typography> {selectedIngredient ? 'Treatment Using: ' + selectedIngredient.ingredient : ''} </Typography>
+                                <Typography> {selectedIngredient ? selectedIngredient.treatments : ''} </Typography>
                 </Stack>
             </Box>
         </Container>
+                </div>
+            </div>
+
+        </Box>
     );
 
 }
