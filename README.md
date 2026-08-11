@@ -1,75 +1,98 @@
-# Getting Started with Create React App
+# Holistic Heal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React web application for personalised Ayurvedic remedy suggestions, combining
+a symptom-based disease prediction system with an interactive chatbot and a
+curated library of traditional remedies.
 
-## Available Scripts
+**Live:** [vermillion-lily-8d840c.netlify.app](https://vermillion-lily-8d840c.netlify.app/)
 
-Run to install required files
+---
 
-### `npm install`
+## Screenshots
 
-In the project directory, you can run:
+### Home
+![Home page](./home.png)
 
-### `npm start`
+### Disease Prediction System
+![Disease prediction search](./prediction.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Remedy Guidance
+![Remedy guidance](./remedies.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### About Ayurveda
+![About page](./about.png)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `npm run build`
+- **Disease prediction system** — searchable, filterable dropdown lets users look
+  up conditions and receive matched Ayurvedic remedy suggestions
+- **Interactive chatbot** — conversational interface for guided remedy discovery
+- **Multi-page navigation** — client-side routing across Home, Start, About, More
+  and Chatbot views with no full-page reloads
+- **Remedy library** — structured content on herbs, spices and natural compounds,
+  organised by health concern
+- **Responsive layout** — adapts across desktop, tablet and mobile breakpoints
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Layer | Technology |
+|---|---|
+| Framework | React (Create React App) |
+| Routing | React Router |
+| Styling | CSS |
+| Deployment | Netlify (continuous deploy from `main`) |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Architecture
 
-### `npm run eject`
+```
+src/
+  components/     reusable UI components shared across pages
+  pages/          Home, Start, About, More, Chatbot
+  data/           remedy and condition datasets
+  App.js          route definitions
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The application is component-driven: each page composes shared presentational
+components, and state for search and chatbot interactions is held locally in the
+components that own it rather than in a global store, keeping the data flow
+explicit and easy to follow.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Running locally
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+git clone https://github.com/RITIKA-SHARMAA/ayurvedic-web.git
+cd ayurvedic-web
+npm install
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The app runs at `http://localhost:3000`.
 
-## Learn More
+```bash
+npm test     # run the test suite
+npm run build   # production build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Testing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Component tests are written with **Jest** and **React Testing Library**, covering:
 
-### Code Splitting
+- rendering and default state of core components
+- user interactions — search input, dropdown selection, navigation
+- edge cases such as empty results and missing data
+- error states when a lookup returns nothing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Roadmap
 
-### Analyzing the Bundle Size
+- Persist chatbot conversation history across sessions
+- Expand the condition dataset and add remedy filtering by category
+- Accessibility pass — keyboard navigation and ARIA labelling
+- Lighthouse performance audit and code-splitting for route-level chunks
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Disclaimer
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
+This project is built for educational and informational purposes. The remedy
+suggestions are drawn from publicly available traditional Ayurvedic sources and
+are not medical advice. Consult a qualified practitioner for health concerns.
